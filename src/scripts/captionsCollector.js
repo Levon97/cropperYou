@@ -54,14 +54,9 @@ async function getTime(link, word) {
   const length = arr.length
 
   for (let i = 0; i < length; i++) {
-<<<<<<< HEAD:src/scripts/captionsCollector.js
 
     if (arr[i].innerHTML.includes(word)) {
 
-=======
-
-    if (arr[i].innerHTML.includes(word)) {
->>>>>>> 183bad2b924d38072dab1ea910800de3e24d91f4:scripts/captionsCollector.js
       
       return {
         start: arr[i].getAttribute("start"),
