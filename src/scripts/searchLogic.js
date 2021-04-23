@@ -1,16 +1,33 @@
-var search = require('youtube-search');
+  
+const { google } = require('googleapis');
 
-var opts = { 
-  maxResults: 10,
-  key: "AIzaSyAmZvP-mB_82wcwS0PZ3Pn2gf8RZOOKLP4",
-  relevanceLanguage: "en",
-  type: "video",
-  videoCaption: "any"
+
+const youtube = google.youtube({
+    version: 'v3',
+    auth: 'AIzaSyAmZvP-mB_82wcwS0PZ3Pn2gf8RZOOKLP4'
+});
+
+const params = {
+    part: 'snippet',
+    maxResults: 1,
+    relevanceLanguage: "en",
+    type: "video",
+    videoCaption: "any"
+
+
 
 };
 
-search( " ", opts, function(err, results) {
-  if(err) return console.log(err);
 
-  console.dir(results);
+
+youtube.search.list(params, (err, res) => {
+  if (err) {
+    console.error(err);
+    throw err;
+  }
+  const arrOfVideos = res.data.items;
+  
+  console.log(res.data.items);
 });
+
+

@@ -70,7 +70,7 @@ async function getTime(link, word) {
 
 
 
-async function getCutedVideos(link) {
+async function getCutedVideosCaptions(link) {
 
   const xml = await getCaptionsXml(link);
 
@@ -108,7 +108,8 @@ getCutedVideos("https://www.youtube.com/watch?v=QRS8MkLhQmM")
 
 
 module.exports = {
-  getTime
+  getTime,
+  getCutedVideosCaptions
 }
 
 
