@@ -1,0 +1,38 @@
+{
+  "name": "youcropper",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server.js",
+    "script": "node ./src/scripts/videoDownloader.js",
+    "dev": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Levon97/youCropper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Levon97/youCropper/issues"
+  },
+  "homepage": "https://github.com/Levon97/youCropper#readme",
+  "description": "cropper for youtube, collage maker",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "ffmpeg-static": "^4.3.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "glob": "^7.1.6",
+    "jsdom": "^16.5.3",
+    "mongoose": "^5.12.5",
+    "redis": "^3.1.1",
+    "xml2js": "^0.4.23",
+    "youtube-search": "^1.1.6",
+    "ytdl-core": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
