@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../stylesheets/PageCss.css" type="text/css">
+    <script src="../../scripts/getUserWords.js"></script>
+    <meta charset="UTF-8">
+    <title> Youtube Cropper</title>
+</head>
+<body id="Global">
+<div id="Header">
+    <div id="Log">
+        <img class="LogoImage" src="../images/logo-fb-en.png" alt="youtube cropper Log" width="200" height="100%">
+    </div>
+    <div id="TextHeader">
+        <h1 style="color: white ; align-items: center" >Youtube Cropper</h1>
+    </div>
+
+</div>
+<div id="TextField">
+    <form action="../../scripts/searchLogic.js" id="FormId">
+        <input type="text" id="formText" name="Words" placeholder="Enter some Words">
+
+
+        <input id="ButtonEnter" type="button" value="Enter" height="200" width="200" onclick="getWords()">
+    </form>
+</div>
+
+</body>
+</html>
