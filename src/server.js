@@ -1,10 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const configs = require('./configs.js')
+const path = require("path");
+
+
 const app = express();
+app.use(express.static( 'public'));
 
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/html/index.html'));
 
-
+});
 
 
 
