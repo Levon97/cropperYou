@@ -2,7 +2,14 @@ const axios = require('axios');
 const ytdl = require('ytdl-core');
 
 const lang = 'en';
+var parser = require('xml2json');
 
+var xml = "<foo attr=\"value\">bar</foo>";
+console.log("input -> %s", xml)
+
+// xml to json
+var json = parser.toJson(xml);
+console.log("to json -> %s", json);
 
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
@@ -23,10 +30,14 @@ async function getCaptionsXml(link) {
     const track = tracks.find(t => t.languageCode === lang);
     if (track) {
 
-      const k = await axios.get(track.baseUrl);
+      const res = await axios.get(track.baseUrl);
 
+      console.log(track.baseUrl)
 
-      return k.data;
+      var json = parser.toJson(res.data);
+
+    console.log(json);
+      return json;
 
     }
   } else {
@@ -57,7 +68,7 @@ async function getTime(link, word) {
 
     if (arr[i].innerHTML.includes(word)) {
 
-      
+
       return {
         start: arr[i].getAttribute("start"),
         dur: arr[i].getAttribute("dur")
@@ -85,7 +96,7 @@ async function getCutedVideosCaptions(link) {
 
   for (i = 0; i < length; i++) {
 
-    if (arr[i].innerHTML.split(" ").length <= 4) {
+    if (arr[i].innerHTML.split(" ").length <= 2) {
 
       let obj = {
         name: arr[i].innerHTML,
@@ -103,8 +114,7 @@ async function getCutedVideosCaptions(link) {
 }
 
 
-
-getCutedVideos("https://www.youtube.com/watch?v=QRS8MkLhQmM")
+ getCaptionsXml("https://www.youtube.com/watch?v=QRS8MkLhQmM")
 
 
 module.exports = {
