@@ -2,24 +2,13 @@ const axios = require('axios');
 const ytdl = require('ytdl-core');
 
 const lang = 'en';
-var parser = require('xml2json');
+const parser = require('xml2json');
 
-var xml = "<foo attr=\"value\">bar</foo>";
-console.log("input -> %s", xml)
-
-// xml to json
-var json = parser.toJson(xml);
-console.log("to json -> %s", json);
-
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-
-// Can be xml, ttml, vtt, srv1, srv2, srv3
 const format = 'xml';
 
 // getting captions from video
 
-async function getCaptionsXml(link) {
+async function getCaptions(link) {
   const ytdlinfo = await ytdl.getInfo(link)
 
   const tracks = ytdlinfo.player_response.captions
@@ -32,11 +21,9 @@ async function getCaptionsXml(link) {
 
       const res = await axios.get(track.baseUrl);
 
-      console.log(track.baseUrl)
+      const json = parser.toJson(res.data, { object: true });
 
-      var json = parser.toJson(res.data);
 
-    console.log(json);
       return json;
 
     }
@@ -49,72 +36,23 @@ async function getCaptionsXml(link) {
 
 
 
-
-// get data from xml captions by link and specific containing word
-
-async function getTime(link, word) {
-
-  const xml = await getCaptionsXml(link);
-
-  const xmlDoc = new JSDOM(xml, {
-    contentType: "text/xml"
-  });
-
-  const arr = xmlDoc.window.document.getElementsByTagName('text');
-
-  const length = arr.length
-
-  for (let i = 0; i < length; i++) {
-
-    if (arr[i].innerHTML.includes(word)) {
-
-
-      return {
-        start: arr[i].getAttribute("start"),
-        dur: arr[i].getAttribute("dur")
-      };
-
-    }
-
-  }
-}
-
-
-
+// return all captions from video that contains max 2  words
 async function getCutedVideosCaptions(link) {
 
-  const xml = await getCaptionsXml(link);
+  const data = await getCaptions(link);
+  const subsArray = data.transcript.text
 
-  const xmlDoc = new JSDOM(xml, {
-    contentType: "text/xml"
-  });
+  // checking max words in subb
+  cutData = subsArray.filter(text => 
+    text.$t.split(" ").length <=3
+  )
 
-  const arr = xmlDoc.window.document.getElementsByTagName('text');
-
-  const length = arr.length
-  const cuttingData = [];
-
-  for (i = 0; i < length; i++) {
-
-    if (arr[i].innerHTML.split(" ").length <= 2) {
-
-      let obj = {
-        name: arr[i].innerHTML,
-        start: arr[i].getAttribute("start"),
-        dur: arr[i].getAttribute("dur")
-      }
-
-      cuttingData.push(obj)
-    };
-
-  }
-
-  console.log(cuttingData);
+  console.log(cutData);
 
 }
 
 
- getCaptionsXml("https://www.youtube.com/watch?v=QRS8MkLhQmM")
+getCutedVideosCaptions("https://www.youtube.com/watch?v=QRS8MkLhQmM")
 
 
 module.exports = {

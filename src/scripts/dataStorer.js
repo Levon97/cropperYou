@@ -1,15 +1,16 @@
-const  searchVideos = require('./searchUrl.js')
+const searchVideos = require('./searchUrl.js')
 
 var opts = {
-    maxResults: 1,
-    key: 'AIzaSyAyDW1r3EmEznzPGQiiZNz391LWAKAPQpA'
+  maxResults: 23,
+  relevanceLanguage: "en",
+  type: "video",
+  videoCaption: "any",
+  key: 'AIzaSyAyDW1r3EmEznzPGQiiZNz391LWAKAPQpA'
 
-  };
+};
 
-async function gag(text,opts){
-    const videos = await searchVideos(text,opts)
-    const urls =  videos.map(video=>video.link);
-    return urls;
+async function gag(text, opts) {
+  const videos = await searchVideos(text, opts)
+  const urls = videos.map(video => video.link);
+  return urls;
 }
-
-gag("marvel",opts)
