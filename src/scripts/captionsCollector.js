@@ -47,16 +47,14 @@ async function getCutedVideosCaptions(link) {
     text.$t.split(" ").length <=3
   )
 
-  console.log(cutData);
+  return  cutData;
 
 }
 
 
-getCutedVideosCaptions("https://www.youtube.com/watch?v=QRS8MkLhQmM")
-
 
 module.exports = {
-  getTime,
+ 
   getCutedVideosCaptions
 }
 

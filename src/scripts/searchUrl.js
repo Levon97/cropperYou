@@ -2,13 +2,29 @@ const search = require('youtube-search');
 
 
 
+ // get videoData by keyword
+ function mySearch(keyword){
+  const opts = {
+    maxResults: 3,
+    relevanceLanguage: "en",
+    type: "video",
+    videoCaption: "closedCaption",
+    key: 'AIzaSyAyDW1r3EmEznzPGQiiZNz391LWAKAPQpA'
+  
+  };
 
-module.exports = function(text,opts){
   return new Promise ((resolve,reject)=>{
-    search(text, opts, function(err, results) {
+    search(keyword, opts, function(err, results) {
       if(err) return reject(err);
     
       resolve(results);
     })
   })
+}
+
+// exporting function thats give urls by search keyword
+module.exports = async function(keyword) {
+  const videos = await mySearch(keyword)
+  const urls = videos.map(video => video.link);
+  return urls;
 }

@@ -1,16 +1,17 @@
-const searchVideos = require('./searchUrl.js')
+const urls = require('./searchUrl.js')
+const { downloadVideo } = require('./videoDownloader')
 
-var opts = {
-  maxResults: 23,
-  relevanceLanguage: "en",
-  type: "video",
-  videoCaption: "any",
-  key: 'AIzaSyAyDW1r3EmEznzPGQiiZNz391LWAKAPQpA'
 
-};
 
-async function gag(text, opts) {
-  const videos = await searchVideos(text, opts)
-  const urls = videos.map(video => video.link);
-  return urls;
+function dataStore(keyword) { }
+
+async function gag() {
+  const urlsArr = await urls(" ");
+  console.log(urlsArr);
+  for (const gul of urlsArr){
+    await downloadVideo(gul)
+  }
 }
+gag()
+
+
