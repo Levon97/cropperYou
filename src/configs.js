@@ -1,5 +1,5 @@
 const db = {
-    url: 'mongodb+srv://levon:dbUserFeanor@projectx.0vbdk.mongodb.net/reposDb?retryWrites=true&w=majority',
+    url: 'mongodb+srv://levon:dbUserFeanor@projectx.0vbdk.mongodb.net/videos?retryWrites=true&w=majority',
     options: {useNewUrlParser: true, useUnifiedTopology: true}
   }; 
 
@@ -13,3 +13,8 @@ const env ={
      db,
      env
  }
+
+ 
+
+
+

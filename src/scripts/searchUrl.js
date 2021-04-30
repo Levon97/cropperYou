@@ -5,11 +5,12 @@ const search = require('youtube-search');
  // get videoData by keyword
  function mySearch(keyword){
   const opts = {
-    maxResults: 3,
+    maxResults: 2,
     relevanceLanguage: "en",
     type: "video",
     videoCaption: "closedCaption",
     key: 'AIzaSyAyDW1r3EmEznzPGQiiZNz391LWAKAPQpA'
+    
   
   };
 
@@ -26,5 +27,5 @@ const search = require('youtube-search');
 module.exports = async function(keyword) {
   const videos = await mySearch(keyword)
   const urls = videos.map(video => video.link);
-  return urls;
+  return urls[0];
 }

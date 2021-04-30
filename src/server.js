@@ -2,15 +2,24 @@ const express = require('express');
 const mongoose = require('mongoose');
 const configs = require('./configs.js')
 const path = require("path");
-
+const HOST = '0.0.0.0';
 
 const app = express();
-app.use(express.static( 'public'));
+app.use(express.static( './src/public'));
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/html/index.html'));
-
+app.get('/', (req, res) => {
+     res.sendFile(path.join(__dirname + '/public/html/index.html'))
+     
+     //res.redirect('/download')
+    // res.send("hello")
 });
+
+
+
+app.get('/download', function(req, res){
+    const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
+    res.download(file); // Set disposition and send it.
+  });
 
 
 
@@ -18,7 +27,7 @@ app.get('/', function(req, res) {
     try {
         await mongoose.connect(configs.db.url, configs.db.options);
         console.log('Connection to DB Successful');
-        app.listen(configs.env.PORT, () => {
+        app.listen(configs.env.PORT,HOST, () => {
             console.log(`Server is running ${configs.env.PORT}`);
           });
     } catch (err) {

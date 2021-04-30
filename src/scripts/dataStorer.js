@@ -1,17 +1,26 @@
 const urls = require('./searchUrl.js')
 const { downloadVideo } = require('./videoDownloader')
-
+const { getCutedVideosCaptions } = require('./captionsCollector')
+const mongoose = require('mongoose')
+const configs = require('../configs')
 
 
 function dataStore(keyword) { }
 
 async function gag() {
-  const urlsArr = await urls(" ");
-  console.log(urlsArr);
-  for (const gul of urlsArr){
-    await downloadVideo(gul)
-  }
+  const url = await urls("english");
+  console.log(url);
+  
+  
+  
+    await downloadVideo(url)
+  
+    
+    
+   
 }
 gag()
+
+
 
 

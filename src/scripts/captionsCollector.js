@@ -13,10 +13,10 @@ async function getCaptions(link) {
 
   const tracks = ytdlinfo.player_response.captions
     .playerCaptionsTracklistRenderer.captionTracks;
-
+      console.log(tracks);
   if (tracks && tracks.length) {
+    const track = tracks.find(t => t.kind === undefined && t.languageCode ==="en");
 
-    const track = tracks.find(t => t.languageCode === lang);
     if (track) {
 
       const res = await axios.get(track.baseUrl);
@@ -44,8 +44,9 @@ async function getCutedVideosCaptions(link) {
 
   // checking max words in subb
   cutData = subsArray.filter(text => 
-    text.$t.split(" ").length <=3
+    text.$t.split(" ").length <=2
   )
+  console.log(cutData);
 
   return  cutData;
 
