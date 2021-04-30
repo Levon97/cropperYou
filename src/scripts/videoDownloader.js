@@ -1,5 +1,5 @@
 
-const VideoSchema = require('../model/videoSchema')
+const Video = require('../model/video')
 const configs = require('../configs')
 
 const readline = require('readline');
@@ -87,9 +87,7 @@ async function downloadVideo(url) {
 
         
 
-        // console.log(output, word);
-        // await dbConnect(word,output)
-
+        
 
 
       })
@@ -102,14 +100,7 @@ async function downloadVideo(url) {
 
 
 
-    //   try {
-    //     fs.unlinkSync(`${__dirname}/videos/temp.mp4`)
-    //     //file removed
-    //   } catch (err) {
-    //     console.error(err)
-    //   }
-    // })
-
+    
 
   });
 
@@ -118,14 +109,14 @@ async function downloadVideo(url) {
 
 }
 
-// downloadVideo('https://www.youtube.com/watch?v=RI6TyhtNjyw')
+
 
 
 
 async function DbStorer(word, path) {
 
 
-  const video = new VideoSchema({
+  const video = new Video({
     word: word,
     path: path,
 
@@ -141,30 +132,6 @@ async function DbStorer(word, path) {
 
 
 
-
-
-
-
- async function dbConnect(word, path) {
-  try {
-    // const db = await mongoose.connect(configs.db.url, configs.db.options);
-    console.log('Connection to DB Successful');
-
-    await DbStorer(word, path)
-    console.log(" saved to mongo DB");
-
-
-    await db.disconnect();
-
-
-
-
-
-
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 module.exports = {
 
