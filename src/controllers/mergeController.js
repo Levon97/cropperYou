@@ -13,6 +13,7 @@ const Video = require("../model/video")
 async function merger(req, res) {
 
     try {
+        console.log(wordsArr);
         // const words = wordsArr()
         const words = ["in English", "native speaker", "harpac", "gagulcho"]
         const videosData = [];
