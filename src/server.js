@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const configs = require('./configs.js')
-const controller=require("./controllers/mergeController")
+const {merrge, merger}=require("./controllers/mergeController")
 const path = require("path");
-const HOST = '0.0.0.0';
+
 
 const app = express();
 app.use(express.static( './src/public'));
@@ -17,12 +17,7 @@ app.get('/', (req, res) => {
 
 
 
-app.post('/download', function(req, res){
-    controller.merger(req,res);
-    const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
-    res.download(file); // Set disposition and send it.
-    res.redirect("/")
-  });
+app.post('/download', merger);
 
 
 
@@ -30,7 +25,7 @@ app.post('/download', function(req, res){
     try {
         await mongoose.connect(configs.db.url, configs.db.options);
         console.log('Connection to DB Successful');
-        app.listen(configs.env.PORT,HOST, () => {
+        app.listen(configs.env.PORT, () => {
             console.log(`Server is running ${configs.env.PORT}`);
           });
     } catch (err) {
