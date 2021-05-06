@@ -38,11 +38,11 @@ async function downloadVideo(url) {
   console.log('Connection to DB Successful');
 
 
-  video.pipe(fs.createWriteStream(path.join(__dirname,'..','..','videos','tempVideo','temp.mp4')))
+  video.pipe(fs.createWriteStream(path.resolve('tempVideo','temp.mp4')))
   video.on('finish', async () => {
     for (const iteration of cuts) {
 
-      let output = path.join(__dirname,'..','..','videos','cutedVideos',`${iteration.$t}-${Date.now()}.mp4`);
+      let output = path.resolve('cutedVideos',`${iteration.$t}-${Date.now()}.mp4`);
       let word = iteration.$t
 
       await DbStorer(word, output)
@@ -50,7 +50,7 @@ async function downloadVideo(url) {
       const ffmpegProcess = cp.spawn(ffmpeg, [
         '-y', '-v', 'error',
         '-progress', 'pipe:3',
-        '-i', path.join(__dirname,'..','..','videos','tempVideo','temp.mp4'),
+        '-i',  path.resolve('tempVideo','temp.mp4'),
         '-vcodec', 'copy', '-acodec', 'copy',
         '-ss', iteration.start, '-t', iteration.dur,
         '-f', 'matroska', 'pipe:4',

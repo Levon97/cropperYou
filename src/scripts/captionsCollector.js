@@ -42,7 +42,7 @@ async function getCutedVideosCaptions(link) {
 
   // checking max words in subb
   cutData = subsArray.filter(text =>
-    text.$t.split(" ").length <= 2
+    text.$t.split(" ").length <= 3
   )
   
   return cutData;

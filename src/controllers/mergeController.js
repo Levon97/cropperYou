@@ -3,7 +3,7 @@ const wordsArr = require('../public/js/getUserWords');
 const Video = require("../model/video");
 const path  = require('path');
 
-const mergedVideosPath = path.join(__dirname,'..','..','videos','mergedVideo','mergedVideo.mp4')
+const mergedVideosPath = path.join(__dirname,'..','..','mergedVideo','mergedVideo.mp4')
 
 
 
@@ -15,7 +15,7 @@ async function merger(req, res) {
         // console.log(req.body);
 
         // const words = wordsArr()
-        const words = [ "Vanessa", "harpac", "gagulcho"]
+        const words = [ "Intel Inside", "Hey", "random"]
         const videosData = [];
         const videos = await Video.find()
         for (const word of words) {
@@ -30,12 +30,11 @@ async function merger(req, res) {
 
         
         const paths = videosData.map(x => x.path)
-        console.log(paths[0]);
         let mergedVideo = fluent_ffmpeg();
+        console.log(paths);
 
 
         paths.forEach((path) => {
-            console.log(path);
             mergedVideo = mergedVideo.addInput(path);
         });
 
