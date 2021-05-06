@@ -1,22 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const configs = require('./configs.js')
-const {merrge, merger}=require("./controllers/mergeController")
-const path = require("path");
-
-
+const configs = require('./configs.js');
+const {merger}=require("./controllers/mergeController");
 const app = express();
 app.use(express.static( './src/public'));
+const path = require('path');
 
 app.get('/', (req, res) => {
      res.sendFile(path.join(__dirname + '/public/html/index.html'))
      
-     //res.redirect('/download')
-    // res.send("hello")
+    
 });
-
-
-
 app.post('/download', merger);
 
 
@@ -34,10 +28,4 @@ app.post('/download', merger);
 })();
 
 
-// (async () => {
-//   console.log('Connection to DB Successful');
-//   app.listen(3050, () => {
-//       console.log(`Server is running ${port}`);
-//     });
-// })();
 

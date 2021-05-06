@@ -13,16 +13,14 @@ async function getCaptions(link) {
 
   const tracks = ytdlinfo.player_response.captions
     .playerCaptionsTracklistRenderer.captionTracks;
-  console.log(tracks);
+
   if (tracks && tracks.length) {
     const track = tracks.find(t => t.languageCode === "en");
 
     if (track) {
 
-      const res = await axios.get(track.baseUrl);
-
+      const res = await axios.get(track.baseUrl); 
       const json = parser.toJson(res.data, { object: true });
-
 
       return json;
 
@@ -46,13 +44,10 @@ async function getCutedVideosCaptions(link) {
   cutData = subsArray.filter(text =>
     text.$t.split(" ").length <= 2
   )
-  console.log(cutData);
-
+  
   return cutData;
 
 }
-
-
 
 module.exports = {
 

@@ -1,5 +1,5 @@
 const db = {
-    url: 'mongodb+srv://levon:dbUserFeanor@projectx.0vbdk.mongodb.net/videos?retryWrites=true&w=majority',
+    url: 'mongodb+srv://levon:dbUserFeanor@projectx.0vbdk.mongodb.net/cropperYou?retryWrites=true&w=majority',
     options: {useNewUrlParser: true, useUnifiedTopology: true}
   }; 
 
@@ -11,8 +11,11 @@ const env ={
 
  module.exports = { 
      db,
-     env
+     env,
+     
  }
+
+
 
  
 

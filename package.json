@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/server.js",
-    "script": "node ./src/scripts/videoDownloader.js",
+    "job": "node ./src/scripts/dataStorer.js",
     "dev": "nodemon ./src/server.js"
   },
   "repository": {

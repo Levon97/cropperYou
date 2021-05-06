@@ -5,6 +5,7 @@ const configs = require('../configs')
 const readline = require('readline');
 const fs = require('fs');
 const mongoose = require('mongoose')
+const path = require('path')
 
 const cp = require('child_process');
 const ytdl = require('ytdl-core');
@@ -13,7 +14,10 @@ const { getCutedVideosCaptions } = require('./captionsCollector')
 
 
 
+
 async function downloadVideo(url) {
+
+
 
 
 
@@ -34,25 +38,19 @@ async function downloadVideo(url) {
   console.log('Connection to DB Successful');
 
 
-  video.pipe(fs.createWriteStream(`${__dirname}/temp/temp.mp4`))
-
-
-
+  video.pipe(fs.createWriteStream(path.join(__dirname,'..','..','videos','tempVideo','temp.mp4')))
   video.on('finish', async () => {
     for (const iteration of cuts) {
 
-
-      let output = `${__dirname}/videos/${iteration.$t}-${Date.now()}.mp4`;
+      let output = path.join(__dirname,'..','..','videos','cutedVideos',`${iteration.$t}-${Date.now()}.mp4`);
       let word = iteration.$t
-
-
 
       await DbStorer(word, output)
       console.log(" saved to mongo DB");
       const ffmpegProcess = cp.spawn(ffmpeg, [
         '-y', '-v', 'error',
         '-progress', 'pipe:3',
-        '-i', `${__dirname}/temp/temp.mp4`,
+        '-i', path.join(__dirname,'..','..','videos','tempVideo','temp.mp4'),
         '-vcodec', 'copy', '-acodec', 'copy',
         '-ss', iteration.start, '-t', iteration.dur,
         '-f', 'matroska', 'pipe:4',
@@ -80,33 +78,25 @@ async function downloadVideo(url) {
 
 
       ffmpegProcess.stdio[4].pipe(fs.createWriteStream(output));
-
       ffmpegProcess.on('close', async () => {
         process.stdout.write(`\nsaved to ${output}\n`);
 
-
-        
-
-        
-
-
       })
-
-
     }
 
-      await db.disconnect();
-      console.log(" DB disconnecting");
-
-
-
-    
+    await db.disconnect();
+    console.log(" DB disconnecting");
 
   });
 
+}
 
+downloadVideo('https://www.youtube.com/watch?v=RI6TyhtNjyw')
 
+function videoStorer() {
+  return new Promise((resolve, reject) => {
 
+  })
 }
 
 
@@ -137,3 +127,5 @@ module.exports = {
 
   downloadVideo
 }
+
+console.log();
