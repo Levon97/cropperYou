@@ -15,7 +15,7 @@ async function merger(req, res) {
         // console.log(req.body);
 
         // const words = wordsArr()
-        const words = [ "Intel Inside", "Hey", "random"]
+        const words = [ "No", "Okay", "random"]
         const videosData = [];
         const videos = await Video.find()
         for (const word of words) {

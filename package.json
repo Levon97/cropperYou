@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Levon97/youCropper#readme",
   "description": "cropper for youtube, collage maker",
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "ffmpeg-static": "^4.3.0",
