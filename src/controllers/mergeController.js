@@ -1,4 +1,5 @@
 const fluent_ffmpeg = require("fluent-ffmpeg");
+
 const wordsArr = require('../public/js/getUserWords');
 const Video = require("../model/video");
 const path  = require('path');
@@ -13,9 +14,10 @@ async function merger(req, res) {
 
     try {
         // console.log(req.body);
-
+        const words=req.body.Words;
+        //console.log(word)
         // const words = wordsArr()
-        const words = [ "No", "Okay", "random"]
+        //const words = [ "No", "Okay", "random"]
         const videosData = [];
         const videos = await Video.find()
         for (const word of words) {

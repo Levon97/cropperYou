@@ -1,9 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
+
 const configs = require('./configs.js');
 const {merger}=require("./controllers/mergeController");
 const app = express();
 app.use(express.static( './src/public'));
+app.use(bodyParser());
 const path = require('path');
 
 app.get('/', (req, res) => {
