@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const configs = require('./configs.js');
 const {merger}=require("./controllers/mergeController");
 const app = express();
+
 app.use(express.static( './src/public'));
 const path = require('path');
 

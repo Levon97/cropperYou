@@ -12,10 +12,11 @@ const mergedVideosPath = path.join(__dirname,'..','..','mergedVideo','mergedVide
 async function merger(req, res) {
 
     try {
-        // console.log(req.body);
+         console.log(req.body);
 
         // const words = wordsArr()
-        const words = [ "No", "Okay", "random"]
+        
+        const words = [ "look", "point", "random"]
         const videosData = [];
         const videos = await Video.find()
         for (const word of words) {
