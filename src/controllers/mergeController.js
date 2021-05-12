@@ -13,15 +13,12 @@ const mergedVideosPath = path.join(__dirname,'..','..','mergedVideo','mergedVide
 async function merger(req, res) {
 
     try {
-        // console.log(req.body);
-        const words=req.body.Words;
-        //console.log(word)
-        // const words = wordsArr()
-        //const words = [ "No", "Okay", "random"]
+        const words= await req.body.Words.split(" ");
+    
         const videosData = [];
         const videos = await Video.find()
         for (const word of words) {
-            let reqVideos = videos.find(x => x.word.includes(word))
+            let reqVideos = videos.find(x => x.word.toLowerCase().includes(word.toLowerCase()))
 
             if (reqVideos === undefined) {
                 continue;
@@ -29,7 +26,7 @@ async function merger(req, res) {
             videosData.push(reqVideos)
 
         }
-
+                
         
         const paths = videosData.map(x => x.path)
         let mergedVideo = fluent_ffmpeg();
@@ -55,7 +52,7 @@ async function merger(req, res) {
 
     } catch (error) {
         console.error()
-        res.status(400).json({ error : "400" });
+        res.status(400).json({ error : "cant creat video with typed words" });
     }
 }
 

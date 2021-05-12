@@ -8,7 +8,7 @@ const Video = require('../model/video')
 
 // Main job for collectiong and saveing to Fs and MongoDb
 async function job() {
-  const url = await urls("legion 5");
+  const url = await urls("american psycho");
   const  dbData= await dataCreator(url);
   await saveCutsToFs(url, dbData);
   await connectionDb(dbData);
@@ -25,7 +25,7 @@ async function dataCreator(url) {
       start: Number(iterator.start),
       dur: Number(iterator.dur),
       word: iterator.$t,
-      path: path.resolve('..', '..', `cutedVideos`, `${iterator.$t}_${Date.now()}.mp4`)
+      path: path.resolve(`cutedVideos`, `${iterator.$t}_${Date.now()}.mp4`)
     })
   }
   return dbData ;

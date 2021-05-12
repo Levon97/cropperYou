@@ -11,7 +11,7 @@ const ffmpeg = require('fluent-ffmpeg')
 function videoDownloader(link) {
 
   return new Promise((resolve, reject) => {
-    const streamForTemp = fs.createWriteStream(path.resolve('..', '..', 'tempVideo', 'temp.mp4'))
+    const streamForTemp = fs.createWriteStream(path.resolve('tempVideo', 'temp.mp4'))
     const video = ytdl(link)
     process.stdout.write('downloading video...')
 
@@ -36,7 +36,7 @@ function videoDownloader(link) {
 function cutter(start, dur,cutedVideoPath) {
   
   return new Promise((resolve, reject) => {
-    const readStream = fs.createReadStream(path.resolve('..', '..', 'tempVideo', 'temp.mp4'))
+    const readStream = fs.createReadStream(path.resolve('tempVideo', 'temp.mp4'))
     ffmpeg(readStream)
       .setStartTime(start)
       .setDuration(dur)
